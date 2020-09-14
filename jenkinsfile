@@ -1,38 +1,16 @@
-pipeline {
-
-    agent none
-
-    tools {
-        // Install the Maven version configured as "M3" and add it to the path.
-        maven "maven3"
-    }
-
-    stages {
-        stage('Build') {
-            agent{
-                kubernetes true
-            }
-            steps {
-                // Get some code from a GitHub repository
-                git 'https://github.com/200803-java-devops/Jank8-sSampleWebProject.git'
-
-                // Run Maven on a Unix agent.
-                sh "mvn -Dmaven.test.failure.ignore=true clean package"
-
-                // To run Maven on a Windows agent, use
-                // bat "mvn -Dmaven.test.failure.ignore=true clean package"
+podTemplate(containers: [containerTemplate(name: 'maven', image: 'bensonre/jenkins-slave', ttyEnabled: true, command: 'cat')], volumes: [hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock')]) {
+  
+  node(POD_LABEL) {
+        stage('Get a Maven project') {
+            git 'https://github.com/200803-java-devops/Jank8-sSampleWebProject'
+            container('maven') {
+                stage('Build a Maven project') {
+                    sh 'mvn clean package'
+                    sh 'docker image ls'
+                }
             }
         }
-        stage('test'){
-            agent{
-                kubernetes true
-            }
-            steps{
-                git 'https://github.com/200803-java-devops/Jank8-sSampleWebProject.git'
 
-                // Run Maven on a Unix agent.
-                sh "mvn test"
-            }
-        }
+
     }
 }
