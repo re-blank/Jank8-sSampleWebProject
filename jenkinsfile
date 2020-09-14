@@ -6,7 +6,9 @@ podTemplate(containers: [containerTemplate(name: 'maven', image: 'bensonre/jenki
             container('maven') {
                 stage('Build a Maven project') {
                     sh 'mvn clean package'
-                    sh 'docker image ls'
+                }
+                stage('docker'){
+                     sh 'docker image ls'
                 }
             }
         }
