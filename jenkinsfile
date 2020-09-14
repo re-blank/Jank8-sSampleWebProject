@@ -1,6 +1,7 @@
 podTemplate(containers: [containerTemplate(name: 'maven', image: 'bensonre/jenkins-slave', ttyEnabled: true, command: 'cat')], volumes: [hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock')]) {
   
   node(POD_LABEL) {
+      try{
         stage('Get a Maven project') {
             git 'https://github.com/200803-java-devops/Jank8-sSampleWebProject'
             container('maven') {
@@ -11,8 +12,11 @@ podTemplate(containers: [containerTemplate(name: 'maven', image: 'bensonre/jenki
                      sh 'docker image ls'
                 }
             }
+            slackSend(color: '#BDFFC3', message: 'The build and Deployment is Successful')
         }
-
-
+      }catch(e){
+            slackSend(color: '#FF0000', message: 'The Build and Deployment Failed, Please Check Console')
+            error "${e}"
+      }
     }
 }
