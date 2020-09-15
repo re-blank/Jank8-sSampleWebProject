@@ -9,7 +9,11 @@ podTemplate(containers: [containerTemplate(name: 'maven', image: 'bensonre/jenki
                     sh 'mvn clean package'
                 }
                 stage('docker'){
-                     sh 'docker image ls'
+                     sh 'docker build -t reblank/jenkins-sample .' 
+                     withCredentials([usernamePassword(credentialsId: 'docker_hub_credentials_2', passwordVariable: 'token', usernameVariable: 'username')]) {
+                            sh 'docker login -u '+ username+' -p '+token
+                            sh 'docker push reblank/jenkins-sample'
+                     }
                 }
             }
             slackSend(color: '#BDFFC3', message: 'The build and Deployment is Successful')
