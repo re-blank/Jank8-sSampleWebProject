@@ -6,7 +6,6 @@ podTemplate(containers: [containerTemplate(name: 'maven', image: 'bensonre/jenki
             container('maven') {
                 stage('Test') {
                     sh 'mvn test'
-                    sh 'false'
                 }
             }
             slackSend(color: '#BDFFC3', message: 'Testing stage for Jank8s-Sample App 1 Succeeded')
