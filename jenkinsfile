@@ -8,13 +8,13 @@ pipeline {
     stages {
         stage('Pull') {
             steps {
-                git url: "https://github.com/re-blank/Jank8-sSampleWebProject"
+                git "https://github.com/re-blank/Jank8-sSampleWebProject"
             }
+        }
         stage('Build') {
             steps {
-                sh 'mvn package -DskipTests=true'
-                sh 'buildah bud .'
-                }
+                    sh 'mvn package -DskipTests=true'
+                    sh 'buildah bud .'
             }
         }
     }
