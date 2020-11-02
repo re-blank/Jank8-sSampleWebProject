@@ -13,7 +13,10 @@
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
    <!-- <exec.mainClass>project1.reesebenson.Watch</exec.mainClass> -->
-   <exec.mainClass>sample1.App</exec.mainClass>
+    <exec.mainClass>sample1.App</exec.mainClass>
+    <sonar.projectKey>re-blank_sample-web-app</sonar.projectKey>
+    <sonar.organization>re-blank</sonar.organization>
+    <sonar.host.url>https://sonarcloud.io</sonar.host.url>
 </properties>
 
 <dependencies>
