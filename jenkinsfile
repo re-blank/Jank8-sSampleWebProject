@@ -72,7 +72,7 @@ pipeline {
             steps
             {
                 git url: 'https://github.com/re-blank/Jank8-sSampleWebProject'
-                withKubeConfig([credentialsId: 'kube-sa', serverUrl: 'https://kubernetes.docker.internal:6443']) {
+                withKubeConfig([credentialsId: 'kube-sa', serverUrl: 'https://kubernetes.default.svc']) {
                     sh 'kubectl apply -f kubernetes'
                 }
             }
