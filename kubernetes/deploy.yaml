@@ -7,7 +7,7 @@ spec:
     selector:
         app: webapp
     ports:
-        - port: 80
+        - port: 8081
           name: web
           targetPort: 8080
 ---
