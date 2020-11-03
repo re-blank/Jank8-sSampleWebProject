@@ -27,4 +27,4 @@ spec:
         spec:
             containers:
             -   name: webapp
-                image: reblank/challenge1_2
+                image: reblank/challenge1_new
