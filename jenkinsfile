@@ -1,4 +1,4 @@
-def repoId = "reblank/challenge1:${currentBuild.number}"
+def repoId = "reblank/challenge1_new:${currentBuild.number}"
 def kubeMaster = "https://4F8B79F4A1D26B81BA998C318A3E06C2.gr7.us-east-1.eks.amazonaws.com"
 
 pipeline {
