@@ -7,7 +7,7 @@ spec:
     selector:
         app: webapp
     ports:
-        - port: 8081
+        - port: 80
           name: web
           targetPort: 8080
 ---
@@ -27,4 +27,4 @@ spec:
         spec:
             containers:
             -   name: webapp
-                image: reblank/challenge1
+                image: reblank/challenge1_2
